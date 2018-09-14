@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 
 namespace TubeDownloaderGUI
@@ -20,6 +21,17 @@ namespace TubeDownloaderGUI
         public TubeDownloaderGUI()
         {
             InitializeComponent();
+
+            //Check for prereqs
+            if (!File.Exists("youtube-dl.exe"))
+            {
+                MessageBox.Show("youtube-dl.exe missing!");
+            }
+            if (!File.Exists("ffmpeg.exe"))
+            {
+                MessageBox.Show("ffmpeg.exe missing!");              
+            }
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -29,6 +41,7 @@ namespace TubeDownloaderGUI
         
         private void button1_Click(object sender, EventArgs e)
         {
+
             //Files are saved to the desktop for now
             string cPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string playlistArgument = "";
