@@ -105,7 +105,7 @@ namespace TubeDownloaderGUI
         {
             
             if (listBox1.SelectedIndex == -1)
-                MessageBox.Show("Nothing selected...");
+                MessageBox.Show("Nothing selected....");
             else
             {
                 string url = listBox1.SelectedItem.ToString();
