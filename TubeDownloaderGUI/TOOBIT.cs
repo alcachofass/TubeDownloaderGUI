@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
-//
+
 
 namespace TubeDownloaderGUI
 {
     public partial class TubeDownloaderGUI : Form
     {
+        //List box index
+        int index = 0;
+                
         public TubeDownloaderGUI()
         {
             InitializeComponent();
@@ -21,16 +24,22 @@ namespace TubeDownloaderGUI
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+          
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             //Files are saved to the desktop for now
             string cPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string playlistArgument = "";
             string mediaTypeFlag = "";
+
+            //Update list box for tracking
             
+            listBox1.Items.Insert(index, textBox1.Text);
+            
+            index++;
+
             if (checkBox1.Checked == true)
             {
                 //We want a playlist
@@ -81,14 +90,41 @@ namespace TubeDownloaderGUI
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+            
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            if (listBox1.SelectedIndex == -1)
+                MessageBox.Show("Nothing selected...");
+            else
+            {
+                string url = listBox1.SelectedItem.ToString();
+                Process.Start("iexplore", url);
+            }
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Process toobit = new Process();
+            toobit.StartInfo.FileName = "youtube-dl.exe";
+            toobit.StartInfo.Arguments = " -U";
+            toobit.Start();
         }
     }
 }
