@@ -74,7 +74,7 @@ namespace TubeDownloaderGUI
             else
             {
                 //MP3 output to desktop
-                mediaTypeFlag = " --extract-audio --audio-format mp3 --audio-quality 0 -o " + cPath + "\\" + "%(title)s.%(ext)s" + "\"";
+                mediaTypeFlag = " --extract-audio --audio-format mp3 --audio-quality 0 -o " + cPath + "\\" + "%(title)s.%(ext)s" + " --add-metadata";
             }
           
             //Pulling the files with desired flags
