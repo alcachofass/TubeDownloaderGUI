@@ -16,7 +16,7 @@ namespace TubeDownloaderGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TOOBIT());
+            Application.Run(new TubeDownloaderGUI());
         }
     }
 }

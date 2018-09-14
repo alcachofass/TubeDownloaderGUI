@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+//
 
 namespace TubeDownloaderGUI
 {
-    public partial class TOOBIT : Form
+    public partial class TubeDownloaderGUI : Form
     {
-        public TOOBIT()
+        public TubeDownloaderGUI()
         {
             InitializeComponent();
         }
@@ -25,30 +26,43 @@ namespace TubeDownloaderGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Files are saved to the desktop for now
+            string cPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string playlistArgument = "";
+            string mediaTypeFlag = "";
+            
+            if (checkBox1.Checked == true)
+            {
+                //We want a playlist
+                playlistArgument = " ";
+            }
+
+            else
+            {
+                //We don't want a playlist
+                playlistArgument = " --no-playlist ";
+            }
 
             if (radioButton1.Checked == true)
-
             {
-                Process toobit = new Process();
-                toobit.StartInfo.FileName = "youtube-dl.exe";
-                toobit.StartInfo.Arguments = textBox1.Text;
-                toobit.Start();
-                
+                //Video output to desktop
+                mediaTypeFlag = " -o " + cPath + "\\" + "%(title)s.%(ext)s" + "\"";
+            }
+
+            else
+            {
+                //MP3 output to desktop
+                mediaTypeFlag = " --extract-audio --audio-format mp3 --audio-quality 0 -o " + cPath + "\\" + "%(title)s.%(ext)s" + "\"";
             }
           
+            //Pulling the files with desired flags
+            Process toobit = new Process();
+            toobit.StartInfo.FileName = "youtube-dl.exe";
+            toobit.StartInfo.Arguments = " \"" + textBox1.Text + "\"" + playlistArgument + mediaTypeFlag;
+            toobit.Start();
 
-            if (radioButton2.Checked == true)
-            {
-
-                Process toobit = new Process();
-                toobit.StartInfo.FileName = "youtube-dl.exe";
-                toobit.StartInfo.Arguments = "-x --audio-format mp3 --audio-quality 0 -o %(title)s.%(ext)s " + textBox1.Text;
-                toobit.Start();
-
-            }
-
-
-
+            //Show effectiver command line
+            textBox2.Text = "youtube-dl.exe" + toobit.StartInfo.Arguments;
             
         }
 
@@ -68,6 +82,11 @@ namespace TubeDownloaderGUI
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
