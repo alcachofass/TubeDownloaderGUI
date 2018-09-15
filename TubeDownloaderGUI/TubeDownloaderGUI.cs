@@ -22,8 +22,7 @@ namespace TubeDownloaderGUI
         string lPath = "Log\\";
 
         //Files are saved to the desktop for now
-        string cPath = "\"" + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\"";
-          
+        string cPath = "\"" + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\"";          
 
         public TubeDownloaderGUI()
         {
