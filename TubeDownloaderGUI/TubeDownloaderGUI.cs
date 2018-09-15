@@ -17,7 +17,13 @@ namespace TubeDownloaderGUI
     {
         //List box index
         int index = 0;
+
+        //Log path
         string lPath = "Log\\";
+
+        //Files are saved to the desktop for now
+        string cPath = "\"" + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\"";
+          
 
         public TubeDownloaderGUI()
         {
@@ -55,17 +61,15 @@ namespace TubeDownloaderGUI
         }
         
         private void button1_Click(object sender, EventArgs e)
-        {
-
-            //Files are saved to the desktop for now
-            string cPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        {            
             string playlistArgument = "";
             string mediaTypeFlag = "";
             
             //Update list box for visual tracking            
             listBox1.Items.Insert(index, textBox1.Text);            
             index++;
-
+                                    
+            //Do we want a playlist?
             if (checkBox1.Checked == true)
             {
                 //We want a playlist
@@ -80,15 +84,15 @@ namespace TubeDownloaderGUI
 
             if (radioButton1.Checked == true)
             {
-                //Video output to desktop
+                //Video output always to desktop
                 mediaTypeFlag = " -o " + cPath + "\\" + "%(title)s.%(ext)s" + "\"";
             }
 
             else
             {
-                //MP3 output to desktop
+                //MP3 output to Desktop 
                 mediaTypeFlag = " --extract-audio --audio-format mp3 --audio-quality 0 -o " + cPath + "\\" + "%(title)s.%(ext)s" + " --add-metadata";
-            }
+            }            
 
             if (File.Exists("Bin\\youtube-dl.exe"))
             {
@@ -190,5 +194,6 @@ namespace TubeDownloaderGUI
 
             return timeStamp;
         }
+
     }
 }

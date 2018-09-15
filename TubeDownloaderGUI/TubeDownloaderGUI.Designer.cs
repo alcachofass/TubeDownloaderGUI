@@ -111,9 +111,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.Size = new System.Drawing.Size(122, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "URL";
+            this.label1.Text = "Paste URL to Download";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
@@ -177,7 +177,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 339);
+            this.ClientSize = new System.Drawing.Size(775, 342);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);
@@ -191,6 +191,8 @@
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "TubeDownloaderGUI";
             this.Text = "TubeDownloaderGUI";
             this.Load += new System.EventHandler(this.Form1_Load);
