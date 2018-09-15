@@ -83,16 +83,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TOOBIT.cs">
+    <Compile Include="TubeDownloaderGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TOOBIT.Designer.cs">
-      <DependentUpon>TOOBIT.cs</DependentUpon>
+    <Compile Include="TubeDownloaderGUI.Designer.cs">
+      <DependentUpon>TubeDownloaderGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="TOOBIT.resx">
-      <DependentUpon>TOOBIT.cs</DependentUpon>
+    <EmbeddedResource Include="TubeDownloaderGUI.resx">
+      <DependentUpon>TubeDownloaderGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
