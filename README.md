@@ -7,7 +7,10 @@ Place ffmpeg files and youtube-dl files in \Bin.
 
 Folder hiearchy should look somewhat like this:
 \Bin
+
 \Log
+
 TubeDownloaderGUI.exe
+
 
 
