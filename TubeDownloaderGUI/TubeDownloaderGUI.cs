@@ -17,40 +17,21 @@ namespace TubeDownloaderGUI
     {
         //List box index
         int index = 0;
-
-        //Log path
-        string lPath = "Log\\";
-
-        //Files are saved to the desktop for now
-        string cPath = "\"" + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\"";          
+        
+        //GUI starts background processes
+        TubeDownloaderBackground backEnd = new TubeDownloaderBackground();
 
         public TubeDownloaderGUI()
         {
-            InitializeComponent();
+            InitializeComponent();            
 
-            //Check for prereqs & log if necessary
-            string timeStamp = getTimeStamp();
+            //check the preReq's after initialization
+            int reqMet = backEnd.checkPreReqs();
 
-            File.AppendAllText(lPath + "actions.log", timeStamp + "," + "---------------LAUNCHED---------------" + Environment.NewLine);
-            File.AppendAllText(lPath + "errors.log", timeStamp + "," + "---------------LAUNCHED---------------" + Environment.NewLine);
-
-            if (!File.Exists("Bin\\youtube-dl.exe"))
+            if (reqMet == 1)
             {
-                MessageBox.Show("youtube-dl.exe missing!");
-                File.AppendAllText(lPath + "errors.log", timeStamp + "," + "Error: youtube-dl.exe missing!" + Environment.NewLine);
-            }
-
-            if (!File.Exists("Bin\\ffmpeg.exe"))
-            {
-                MessageBox.Show("ffmpeg.exe missing!");
-                File.AppendAllText(lPath + "errors.log", timeStamp + "," + "Error: ffmpeg.exe missing!" + Environment.NewLine);
-            }
-
-            if (!File.Exists("Bin\\ffprobe.exe"))
-            {
-                MessageBox.Show("ffprobe.exe missing!");
-                File.AppendAllText(lPath + "errors.log", timeStamp + "," + "Error: ffprobe.exe missing!" + Environment.NewLine);
-            }
+                MessageBox.Show("Requirements NOT met! Check for missing pre-req's in log files.");
+            }           
 
         }
 
@@ -60,64 +41,12 @@ namespace TubeDownloaderGUI
         }
         
         private void button1_Click(object sender, EventArgs e)
-        {            
-            string playlistArgument = "";
-            string mediaTypeFlag = "";
-            
-            //Update list box for visual tracking            
-            listBox1.Items.Insert(index, textBox1.Text);            
+        {
+            //Process the download, insert into list and increase counter
+            textBox2.Text = backEnd.processDL(checkBox1.Checked, radioButton1.Checked, textBox1.Text, textBox2.Text);
+            listBox1.Items.Insert(index, textBox1.Text);
             index++;
-                                    
-            //Do we want a playlist?
-            if (checkBox1.Checked == true)
-            {
-                //We want a playlist
-                playlistArgument = " ";
-            }
 
-            else
-            {
-                //We don't want a playlist
-                playlistArgument = " --no-playlist";
-            }
-
-            if (radioButton1.Checked == true)
-            {
-                //Video output always to desktop
-                mediaTypeFlag = " -o " + cPath + "\\" + "%(title)s.%(ext)s" + "\"";
-            }
-
-            else
-            {
-                //MP3 output to Desktop 
-                mediaTypeFlag = " --extract-audio --audio-format mp3 --audio-quality 0 -o " + cPath + "\\" + "%(title)s.%(ext)s" + " --add-metadata";
-            }            
-
-            if (File.Exists("Bin\\youtube-dl.exe"))
-            {
-
-                //Pulling the files with desired flags
-                Process toobit = new Process();
-                toobit.StartInfo.FileName = "Bin\\youtube-dl.exe";
-                toobit.StartInfo.Arguments = " \"" + textBox1.Text + "\"" + playlistArgument + mediaTypeFlag;
-                toobit.Start();
-
-                //Show effectiver command line
-                textBox2.Text = "youtube-dl.exe" + toobit.StartInfo.Arguments;
-
-                string timeStamp = getTimeStamp();
-
-                File.AppendAllText(lPath + "actions.log", timeStamp + "," + "Started conversion with command line: " + textBox2.Text.ToString() + Environment.NewLine);                
-            }
-
-            else
-            {
-                string timeStamp = getTimeStamp();
-
-                MessageBox.Show("youtube-dl.exe missing!");
-                File.AppendAllText(lPath + "errors.log", timeStamp + "," + "Error: youtube-dl.exe missing!"  + Environment.NewLine);
-            }          
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -147,17 +76,14 @@ namespace TubeDownloaderGUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string timeStamp = getTimeStamp();
-
+            
             if (listBox1.SelectedIndex == -1)
                 MessageBox.Show("Nothing selected....");
-            else
-            {
-                string url = listBox1.SelectedItem.ToString();
-                Process.Start("iexplore", url);
 
-                File.AppendAllText(lPath + "actions.log", timeStamp + "," + "Launched browser with URL: " + url +  Environment.NewLine);
-            }
+            else
+            {                
+                backEnd.launchURL(listBox1.SelectedItem.ToString());                         
+            }                     
 
         }
 
@@ -168,7 +94,121 @@ namespace TubeDownloaderGUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string timeStamp = getTimeStamp();
+            backEnd.updateYTDL();            
+
+        }
+
+    }
+
+
+    public class TubeDownloaderBackground
+    {
+        string lPath = "Log\\";
+
+        public int checkPreReqs()
+        {            
+                                     
+            //if any pre-req's is missing, fail checks. Otherwise return 0
+            if (!File.Exists("Bin\\youtube-dl.exe"))
+            {
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "Error: youtube-dl.exe missing!" + Environment.NewLine);
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "---------------PRE-REQ-CHECK-FAIL--------------" + Environment.NewLine);
+
+                return 1;
+            }
+
+            if (!File.Exists("Bin\\ffmpeg.exe"))
+            {
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "Error: ffmpeg.exe missing!" + Environment.NewLine);
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "---------------PRE-REQ-CHECK-FAIL--------------" + Environment.NewLine);
+
+                return 1;
+            }
+
+            if (!File.Exists("Bin\\ffprobe.exe"))
+            {
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "Error: ffprobe.exe missing!" + Environment.NewLine);
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "---------------PRE-REQ-CHECK-FAIL--------------" + Environment.NewLine);
+
+                return 1;
+            }
+
+            else
+            {
+                
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "---------------PRE-REQ-CHECK-PASS--------------" + Environment.NewLine);
+                return 0;
+            }
+
+
+        }
+
+        public string processDL(bool checkBox1Checked, bool radioButton1Checked, string textBox1Text, string textBox2Text)
+        {
+
+            string playlistArgument = "";
+            string mediaTypeFlag = "";
+            string cPath = "\"" + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\"";
+            string effectiveCommandLine = "";
+                     
+
+            //Do we want a playlist?
+            if (checkBox1Checked == true)
+            {
+                //We want a playlist
+                playlistArgument = " ";
+            }
+
+            else
+            {
+                //We don't want a playlist
+                playlistArgument = " --no-playlist";
+            }
+
+            if (radioButton1Checked == true)
+            {
+                //Video output always to desktop
+                mediaTypeFlag = " -o " + cPath + "\\" + "%(title)s.%(ext)s" + "\"";
+            }
+
+            else
+            {
+                //MP3 output to Desktop 
+                mediaTypeFlag = " --extract-audio --audio-format mp3 --audio-quality 0 -o " + cPath + "\\" + "%(title)s.%(ext)s" + " --add-metadata";
+            }
+
+            if (File.Exists("Bin\\youtube-dl.exe"))
+            {
+
+                //Pulling the files with desired flags
+                Process toobit = new Process();
+                toobit.StartInfo.FileName = "Bin\\youtube-dl.exe";
+                toobit.StartInfo.Arguments = " \"" + textBox1Text + "\"" + playlistArgument + mediaTypeFlag;
+                toobit.Start();
+
+                //Show effectiver command line
+                effectiveCommandLine = "youtube-dl.exe" + toobit.StartInfo.Arguments;
+                       
+
+                File.AppendAllText(lPath + "actions.log", getTimeStamp() + "," + "Started conversion with command line: " + effectiveCommandLine  + Environment.NewLine);
+           
+            }
+
+            else
+            {
+               
+                MessageBox.Show("youtube-dl.exe missing!");
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "Error: youtube-dl.exe missing!" + Environment.NewLine);
+            }
+
+            //effectiveCommandLine is returned to the GUI
+            return effectiveCommandLine;
+            
+        }
+
+        public void updateYTDL()
+        {             
+           
 
             if (File.Exists("Bin\\youtube-dl.exe"))
             {
@@ -177,13 +217,21 @@ namespace TubeDownloaderGUI
                 toobit.StartInfo.Arguments = " -U";
                 toobit.Start();
 
-                File.AppendAllText(lPath + "actions.log", timeStamp + "," + "Triggered native auto-updater"  + Environment.NewLine);
+                File.AppendAllText(lPath + "actions.log", getTimeStamp() + "," + "Triggered native auto-updater"  + Environment.NewLine);
             }
             else
             {
                 MessageBox.Show("youtube-dl.exe missing!");
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "Error: youtube-dl.exe missing during update check!" + Environment.NewLine);
             }
-                      
+        }
+
+        public void launchURL(string url)
+        {           
+                
+            Process.Start("iexplore", url);
+            File.AppendAllText(lPath + "actions.log", getTimeStamp() + "," + "Launched browser with URL: " + url + Environment.NewLine);
+          
         }
 
         private string getTimeStamp()
@@ -195,4 +243,5 @@ namespace TubeDownloaderGUI
         }
 
     }
+
 }
