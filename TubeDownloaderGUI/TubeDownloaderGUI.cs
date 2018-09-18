@@ -37,7 +37,8 @@ namespace TubeDownloaderGUI
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-          
+            
+            
         }
         
         private void button1_Click(object sender, EventArgs e)
@@ -46,12 +47,13 @@ namespace TubeDownloaderGUI
             textBox2.Text = backEnd.processDL(checkBox1.Checked, radioButton1.Checked, textBox1.Text, textBox2.Text);
             listBox1.Items.Insert(index, textBox1.Text);
             index++;
-
+     
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //Enter key will default to button click (process DL)
+            this.AcceptButton = button1;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -94,10 +96,19 @@ namespace TubeDownloaderGUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            backEnd.updateYTDL();            
+            backEnd.updateYTDL();           
 
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

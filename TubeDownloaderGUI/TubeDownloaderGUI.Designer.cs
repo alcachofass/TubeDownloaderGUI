@@ -140,9 +140,10 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 53);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 13);
+            this.label3.Size = new System.Drawing.Size(90, 13);
             this.label3.TabIndex = 10;
-            this.label3.Text = "History";
+            this.label3.Text = "Download History";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // button2
             // 
@@ -162,6 +163,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(105, 191);
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // button3
             // 
@@ -192,6 +194,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "TubeDownloaderGUI";
             this.Text = "TubeDownloaderGUI";
