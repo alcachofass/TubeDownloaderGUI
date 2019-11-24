@@ -163,7 +163,7 @@ namespace TubeDownloaderGUI
             string effectiveCommandLine = "";
                      
 
-            //Do we want a playlist?
+            //Do we want a playlist downloaded?
             if (checkBox1Checked == true)
             {
                 //We want a playlist
