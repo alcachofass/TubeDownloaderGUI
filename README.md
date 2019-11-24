@@ -1,19 +1,14 @@
 # TubeDownloaderGUI
 Info:
 
-This is a very basic, limited, feature-poor front-end for youtube-dl. It allows for (my) basic needs with a copy/paste workflow familiar to Windows users. 
+This is a basic front-end for youtube-dl. It allows for my basic needs with a copy/paste workflow familiar to Windows users. 
 
 Requirements:
 
-Place ffmpeg files and youtube-dl files in \Bin. 
+Place ffmpeg files and youtube-dl executables in \Bin. This program will reference those files, however they are not included here.
 
-Folder hiearchy should look somewhat like this:
+The \Log folder contains pre-requisite check data as well as a log of URLs pasted.
 
-\Bin
-
-\Log
-
-TubeDownloaderGUI.exe
 
 
 
