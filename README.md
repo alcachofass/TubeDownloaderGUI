@@ -9,6 +9,5 @@ Place ffmpeg files and youtube-dl executables in \Bin. This program will referen
 
 The \Log folder contains pre-requisite check data as well as a log of URLs pasted.
 
-![ScreenShot](https://https://github.com/alcachofass/TubeDownloaderGUI/blob/master/screenshot.png)
-
+![alt text](screenshot.png "That's it.")
 
