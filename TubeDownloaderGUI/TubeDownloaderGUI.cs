@@ -117,8 +117,18 @@ namespace TubeDownloaderGUI
         string lPath = "Log\\";
 
         public int checkPreReqs()
-        {            
-                                     
+        {
+
+            //create pre-req folders if missing
+            if (!Directory.Exists("Bin")) {
+                Directory.CreateDirectory("Bin");
+            }
+            
+            
+            if (!Directory.Exists("Log")) {
+                Directory.CreateDirectory("Log");
+            }
+
             //if any pre-req's is missing, fail checks. Otherwise return 0
             if (!File.Exists("Bin\\yt-dlp.exe"))
             {
@@ -240,7 +250,7 @@ namespace TubeDownloaderGUI
         public void launchURL(string url)
         {           
                 
-            Process.Start("iexplore", url);
+            Process.Start("msedge", url);
             File.AppendAllText(lPath + "actions.log", getTimeStamp() + "," + "Launched browser with URL: " + url + Environment.NewLine);
           
         }
