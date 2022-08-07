@@ -120,9 +120,9 @@ namespace TubeDownloaderGUI
         {            
                                      
             //if any pre-req's is missing, fail checks. Otherwise return 0
-            if (!File.Exists("Bin\\youtube-dl.exe"))
+            if (!File.Exists("Bin\\yt-dlp.exe"))
             {
-                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "Error: youtube-dl.exe missing!" + Environment.NewLine);
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "Error: yt-dlp.exe missing!" + Environment.NewLine);
                 File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "---------------PRE-REQ-CHECK-FAIL--------------" + Environment.NewLine);
 
                 return 1;
@@ -188,17 +188,17 @@ namespace TubeDownloaderGUI
                 mediaTypeFlag = " --extract-audio --audio-format mp3 --audio-quality 0 -o " + cPath + "\\" + "%(title)s.%(ext)s" + " --add-metadata";
             }
 
-            if (File.Exists("Bin\\youtube-dl.exe"))
+            if (File.Exists("Bin\\yt-dlp.exe"))
             {
 
                 //Pulling the files with desired flags
                 Process toobit = new Process();
-                toobit.StartInfo.FileName = "Bin\\youtube-dl.exe";
+                toobit.StartInfo.FileName = "Bin\\yt-dlp.exe";
                 toobit.StartInfo.Arguments = " \"" + textBox1Text + "\"" + playlistArgument + mediaTypeFlag;
                 toobit.Start();
 
                 //Show effectiver command line
-                effectiveCommandLine = "youtube-dl.exe" + toobit.StartInfo.Arguments;
+                effectiveCommandLine = "yt-dlp.exe" + toobit.StartInfo.Arguments;
                        
 
                 File.AppendAllText(lPath + "actions.log", getTimeStamp() + "," + "Started conversion with command line: " + effectiveCommandLine  + Environment.NewLine);
@@ -208,8 +208,8 @@ namespace TubeDownloaderGUI
             else
             {
                
-                MessageBox.Show("youtube-dl.exe missing!");
-                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "Error: youtube-dl.exe missing!" + Environment.NewLine);
+                MessageBox.Show("yt-dlp.exe missing!");
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "Error: yt-dlp.exe missing!" + Environment.NewLine);
             }
 
             //effectiveCommandLine is returned to the GUI
@@ -221,10 +221,10 @@ namespace TubeDownloaderGUI
         {             
            
 
-            if (File.Exists("Bin\\youtube-dl.exe"))
+            if (File.Exists("Bin\\yt-dlp.exe"))
             {
                 Process toobit = new Process();
-                toobit.StartInfo.FileName = "Bin\\youtube-dl.exe";
+                toobit.StartInfo.FileName = "Bin\\yt-dlp.exe";
                 toobit.StartInfo.Arguments = " -U";
                 toobit.Start();
 
@@ -232,8 +232,8 @@ namespace TubeDownloaderGUI
             }
             else
             {
-                MessageBox.Show("youtube-dl.exe missing!");
-                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "Error: youtube-dl.exe missing during update check!" + Environment.NewLine);
+                MessageBox.Show("yt-dlp.exe missing!");
+                File.AppendAllText(lPath + "errors.log", getTimeStamp() + "," + "Error: yt-dlp.exe missing during update check!" + Environment.NewLine);
             }
         }
 
