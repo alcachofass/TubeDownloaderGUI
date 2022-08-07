@@ -47,9 +47,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(654, 76);
+            this.button1.Location = new System.Drawing.Point(641, 238);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 45);
+            this.button1.Size = new System.Drawing.Size(105, 62);
             this.button1.TabIndex = 0;
             this.button1.Text = "Download";
             this.button1.UseVisualStyleBackColor = true;
@@ -66,11 +66,11 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(707, 26);
+            this.radioButton1.Location = new System.Drawing.Point(413, 274);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(52, 17);
+            this.radioButton1.Size = new System.Drawing.Size(103, 17);
             this.radioButton1.TabIndex = 2;
-            this.radioButton1.Text = "Video";
+            this.radioButton1.Text = "Audio and Video";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
@@ -78,19 +78,19 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(654, 26);
+            this.radioButton2.Location = new System.Drawing.Point(331, 274);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(47, 17);
+            this.radioButton2.Size = new System.Drawing.Size(76, 17);
             this.radioButton2.TabIndex = 3;
             this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "MP3";
+            this.radioButton2.Text = "Audio Only";
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(654, 53);
+            this.checkBox1.Location = new System.Drawing.Point(522, 274);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(98, 17);
             this.checkBox1.TabIndex = 5;
@@ -101,7 +101,7 @@
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox2.Location = new System.Drawing.Point(12, 307);
+            this.textBox2.Location = new System.Drawing.Point(12, 238);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(617, 20);
             this.textBox2.TabIndex = 6;
@@ -111,15 +111,15 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 13);
+            this.label1.Size = new System.Drawing.Size(118, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Paste URL to Download";
+            this.label1.Text = "URL to Download From";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 291);
+            this.label2.Location = new System.Drawing.Point(12, 222);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 8;
@@ -148,7 +148,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(485, 233);
+            this.button2.Location = new System.Drawing.Point(181, 264);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(144, 36);
             this.button2.TabIndex = 11;
@@ -161,7 +161,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(654, 136);
+            this.pictureBox1.Location = new System.Drawing.Point(641, 25);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(105, 191);
             this.pictureBox1.TabIndex = 12;
@@ -170,7 +170,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 233);
+            this.button3.Location = new System.Drawing.Point(12, 264);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(163, 36);
             this.button3.TabIndex = 13;
@@ -182,7 +182,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(775, 342);
+            this.ClientSize = new System.Drawing.Size(757, 312);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);
