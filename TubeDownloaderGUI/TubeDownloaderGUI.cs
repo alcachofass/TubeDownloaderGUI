@@ -43,10 +43,19 @@ namespace TubeDownloaderGUI
         
         private void button1_Click(object sender, EventArgs e)
         {
-            //Process the download, insert into list and increase counter
-            textBox2.Text = backEnd.processDL(checkBox1.Checked, radioButton1.Checked, textBox1.Text, textBox2.Text);
-            listBox1.Items.Insert(index, textBox1.Text);
-            index++;
+            if (String.IsNullOrEmpty(textBox1.Text))
+            {
+                MessageBox.Show("No URL entered....");
+            }
+
+            //As long as something was written, try to process the download, insert into list and increase counter
+            else
+            {
+                 textBox2.Text = backEnd.processDL(checkBox1.Checked, radioButton1.Checked, textBox1.Text, textBox2.Text);
+                 listBox1.Items.Insert(index, textBox1.Text);
+                 index++;
+            }
+           
      
         }
 
